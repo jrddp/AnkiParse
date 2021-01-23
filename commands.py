@@ -1,7 +1,9 @@
-actions = "dqartf"
-multiline_actions = "qa"
+import cards
 
 last_cmd_cache = {}
+
+replacable_str = "___"
+replacement_delim = "///"
 
 class Command:
     action = ""
@@ -20,7 +22,7 @@ class Command:
         self.body = body
         self.done = False
 
-        if self.action not in multiline_actions:
+        if not self.multiline:
             self.do()
 
     def __iadd__(self, other):
@@ -38,8 +40,7 @@ class CommandDeck(Command):
     multiline = False
 
     def do(self):
-        import analyzer
-        analyzer.current_deck = self.body
+        cards.current_deck = self.body
         super().do()
 
 
@@ -48,6 +49,8 @@ class CommandQuestion(Command):
     multiline = True
 
     def do(self):
+        cards.current_card.close()
+        cards.current_card = cards.Card(front=self.body, add_reversed="q" in self.args)
         super().do()
 
 
@@ -57,6 +60,7 @@ class CommandAnswer(Command):
     repeatable = True
 
     def do(self):
+        cards.current_card.back = self.body
         super().do()
 
 
@@ -65,6 +69,16 @@ class CommandReplace(Command):
     multiline = False
 
     def do(self):
+        sequential = "s" in self.args
+        text = cards.current_card.front
+        count = text.count(replacable_str)
+        if count == 1:
+            text = text.replace(replacable_str, "{{c1::%s}}" % self.body.strip(), 1)
+        else:
+            for i, repl in enumerate(self.body.split(replacement_delim), 1):
+                text = text.replace(replacable_str, "{{c%d::%s}}" % ((i if sequential else 1), repl.strip()), 1)
+        cards.current_card.front = text
+        cards.current_card.is_cloze = True
         super().do()
 
 
@@ -74,6 +88,7 @@ class CommandTag(Command):
     repeatable = True
 
     def do(self):
+        cards.current_card.tags = self.body.split()
         super().do()
 
 
@@ -84,6 +99,7 @@ class CommandFinalize(Command):
     def do(self):
         super().do()
 
+
 class CommandRepeat(Command):
     action = "!"
     multiline = False
@@ -93,5 +109,6 @@ class CommandRepeat(Command):
             if action in last_cmd_cache.keys():
                 last_cmd_cache[action].do()
             else:
-                raise ReferenceError(f"Failed to repeat {action} command: It is either non-repeatable or not yet performed.")
+                raise ReferenceError(
+                    f"Failed to repeat {action} command: It is either non-repeatable or not yet performed.")
         super().do()

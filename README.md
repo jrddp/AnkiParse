@@ -47,3 +47,10 @@ Finalizes the currently open card
 > Usage: `!![at]`
 
 Will use the same values for the last `a` or `t` called for the current card.
+
+# Autoformatting
+## Markdown Code Blocks
+Any markdown-formatted code blocks will automatically be formatted when creating the card, so long as the respective language is included.
+
+## LaTeX
+Since Anki has better support for MathJax than LaTeX, using `$MATH$` or `$$MATH$$` will automatically transform into their MathJax formats when a card is created.
