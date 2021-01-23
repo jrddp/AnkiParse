@@ -57,7 +57,6 @@ class CommandAnswer(Command):
     repeatable = True
 
     def do(self):
-        last_answer_cmd = self
         super().do()
 
 
@@ -75,7 +74,6 @@ class CommandTag(Command):
     repeatable = True
 
     def do(self):
-        last_tag_cmd = self
         super().do()
 
 

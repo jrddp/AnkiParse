@@ -42,3 +42,8 @@ Add anki tags to your card (Space seperated)
 > Usage: `!f`
 
 Finalizes the currently open card
+
+## Repeat: `!!`
+> Usage: `!![at]`
+
+Will use the same values for the last `a` or `t` called for the current card.
