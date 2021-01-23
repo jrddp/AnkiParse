@@ -78,7 +78,7 @@ class CommandReplace(Command):
             for i, repl in enumerate(self.body.split(replacement_delim), 1):
                 text = text.replace(replacable_str, "{{c%d::%s}}" % ((i if sequential else 1), repl.strip()), 1)
         cards.current_card.front = text
-        cards.current_card.is_cloze = True
+        cards.current_card.model = "Cloze"
         super().do()
 
 
