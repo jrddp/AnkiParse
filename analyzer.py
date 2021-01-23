@@ -1,7 +1,9 @@
 import re
 from commands import Command
 
-command_pattern = "!(\w)(\w*)\s*(.*)"
+current_deck = None
+
+command_pattern = "!(\S)(\S*)\s*(.*)"
 
 with open("test/anki_test.txt", "r") as f:
         lines = f.readlines()

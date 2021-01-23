@@ -1,28 +1,40 @@
 # Commands
 ## Deck: !d
+> Usage: `!d {DECK}[:SUBDECK]`
 
-Indicates what deck to add following cards to
+Sets the deck that any following cards will be added to
 
 ## Question: !q
-> Usage: `!q {BODY}`
+> Usage: `!q[q] {BODY}`
 
-Creates a new card with `{BODY}` as the front side text
+Opens a new card with `{BODY}` as the front side text
 
 If an existing card is opened, it will be finalized
 
 `{BODY}` can be multiple lines, and will finalize upon the next given command.
 
+### Reverse Card Argument: q
+Changes behavior to also add the reverse of the created card. Will not affect Cloze cards.
+
 ## Answer: !a
 > Usage: `!a {BODY}`
 
+Adds `{BODY}` as the back side text of the opened card
+
 ## Replace: !r
-> Usage: `!r[s] {BODY}`
+> Usage: `!r[s] {REP1}///{REP2}...`
+
+Replaces any "___" (3 underscores) with `{REP}` as a Cloze deletion.
+
+If there are multiple "___", multiple replacements can be seperated by "///". By default, one card will be created hiding all replacements.
+
+Having any `!r` perform on an open card will change it to a Cloze card.
 
 ### Sequential Argument: `s`
-Will create 
+Changes behavior of multiple replacements to create individual cards for each replacement, rather than one card for all replacements
 
 ## Tag: !t
-> Usage: `!t {TAG1} {TAG2}...`
+> Usage: `!t[t] {TAG1} {TAG2}...`
 
 Add anki tags to your card (Space seperated)
 

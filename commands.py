@@ -1,10 +1,12 @@
 actions = "dqartf"
 multiline_actions = "qa"
 
+last_cmd_cache = {}
 
 class Command:
     action = ""
     multiline = True
+    repeatable = False
 
     @classmethod
     def create(cls, action, args, body):
@@ -26,6 +28,8 @@ class Command:
 
     def do(self):
         print("Performed " + self.action)
+        if self.repeatable:
+            last_cmd_cache[self.action] = self
         self.done = True
 
 
@@ -34,6 +38,8 @@ class CommandDeck(Command):
     multiline = False
 
     def do(self):
+        import analyzer
+        analyzer.current_deck = self.body
         super().do()
 
 
@@ -48,8 +54,10 @@ class CommandQuestion(Command):
 class CommandAnswer(Command):
     action = "a"
     multiline = True
+    repeatable = True
 
     def do(self):
+        last_answer_cmd = self
         super().do()
 
 
@@ -64,8 +72,10 @@ class CommandReplace(Command):
 class CommandTag(Command):
     action = "t"
     multiline = False
+    repeatable = True
 
     def do(self):
+        last_tag_cmd = self
         super().do()
 
 
@@ -74,4 +84,16 @@ class CommandFinalize(Command):
     multiline = False
 
     def do(self):
+        super().do()
+
+class CommandRepeat(Command):
+    action = "!"
+    multiline = False
+
+    def do(self):
+        for action in self.args:
+            if action in last_cmd_cache.keys():
+                last_cmd_cache[action].do()
+            else:
+                raise ReferenceError(f"Failed to repeat {action} command: It is either non-repeatable or not yet performed.")
         super().do()
