@@ -1,5 +1,5 @@
 if __name__ == '__main__':
-    import analyzer
+    import analyzer, sys
 
-    with open("test/anki_test.txt", "r") as f:
+    with open(sys.argv[1], "r") as f:
         analyzer.analyze(f)

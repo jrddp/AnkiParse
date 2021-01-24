@@ -29,7 +29,6 @@ class Command:
         return self
 
     def do(self):
-        print("Performed " + self.action)
         if self.repeatable:
             last_cmd_cache[self.action] = self
         self.done = True

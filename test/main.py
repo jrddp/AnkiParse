@@ -79,6 +79,14 @@ class ClozeCard(Card):
 replace_str = "?"
 repl_strip = ","
 
+class Command:
+
+    @staticmethod
+    def parse(text):
+        cmd = text[1]
+
+        args_end = text.find(" ")
+        args = text[2:args_end] if len(text) > 2 and args_end > 2 else ""
 
 def analyze(file_path):
     cards = []

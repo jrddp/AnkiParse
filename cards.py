@@ -7,6 +7,8 @@ class Card:
         if tags is None:
             tags = []
 
+        if (add_reversed): model = "Basic (and reversed card)"
+
         self.deck = current_deck
         self.front = front
         self.back = back
@@ -23,7 +25,6 @@ class Card:
             print(f"{e.__class__.__name__}: {e.args}")
             pass
         else:
-            print("Success!")
             pass
 
 
