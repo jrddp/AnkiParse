@@ -1,6 +1,10 @@
 import re
 
 
+def format_newlines(text):
+    return text.replace("\n", "<br \\>")
+
+
 def format_latex_to_mathjax(text):
     import re
 
@@ -24,10 +28,12 @@ def format_code_blocks(text):
     def format_block(match: re.Match):
         lang, code = match.groups()
         lexer = lexers.get_lexer_by_name(lang, stripall=True)
-        return highlight(code, lexer, formatter)
+        return "<center><table><tbody><tr><td>" + highlight(code, lexer, formatter) + "</td></tr></tbody></table></center>"
 
     return re.sub(code_block_pattern, format_block, text, flags=re.DOTALL)
 
 
 def format_everything(text):
-    return format_code_blocks(format_latex_to_mathjax(text))
+    return format_newlines(
+        format_latex_to_mathjax(
+            format_code_blocks(text)))
