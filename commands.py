@@ -5,9 +5,10 @@ last_cmd_cache = {}
 replacable_str = "___"
 replacement_delim = "///"
 
+
 class Command:
     action = ""
-    multiline = True
+    multiline = False
     repeatable = False
 
     @classmethod
@@ -19,14 +20,13 @@ class Command:
 
     def __init__(self, args, body):
         self.args = args
+        if body and self.multiline: body += "\n"
         self.body = body
         self.done = False
 
-        if not self.multiline:
-            self.do()
-
     def __iadd__(self, other):
         self.body += other
+        return self
 
     def do(self):
         print("Performed " + self.action)
@@ -49,7 +49,7 @@ class CommandQuestion(Command):
     multiline = True
 
     def do(self):
-        cards.current_card.close()
+        if cards.current_card is not None: cards.current_card.close()
         cards.current_card = cards.Card(front=self.body, add_reversed="q" in self.args)
         super().do()
 

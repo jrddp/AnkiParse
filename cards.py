@@ -18,6 +18,7 @@ class Card:
         try:
             self.front = formatter.format_everything(self.front)
             self.back = formatter.format_everything(self.back)
+            send_card_to_anki(self)
         except Exception as e:
             print(f"{e.__class__.__name__}: {e.args}")
             pass
