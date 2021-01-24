@@ -1,6 +1,6 @@
 # Commands
 ## Deck: !d
-> Usage: `!d {DECK}[:SUBDECK]`
+> Usage: `!d {DECK}[::SUBDECK]`
 
 Sets the deck that any following cards will be added to
 
