@@ -18,7 +18,10 @@ def analyze(file):
     for line in file.readlines():
         if len(line) > 0 and line.startswith("!"):
             action, args, body = re.match(command_pattern, line).groups()
-            start_command(Command.create(action, args, body))
+            try:
+                start_command(Command.create(action, args, body))
+            except ValueError:
+                current_command += line
         elif current_command is not None:
             current_command += line
 
