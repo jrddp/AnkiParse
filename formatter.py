@@ -8,10 +8,10 @@ def format_newlines(text):
 def format_latex_to_mathjax(text):
     import re
 
-    # Replaces $ANYTHING$ with \(ANYTHING\)
-    text = re.sub(r"\$(.*?)\$", r"\(\1\)", str(text))
     # Replaces $$ANYTHING$$ with \[ANYTHING\]
     text = re.sub(r"\$\$(.*?)\$\$", r"\[\1\]", str(text))
+    # Replaces $ANYTHING$ with \(ANYTHING\)
+    text = re.sub(r"\$(.*?)\$", r"\(\1\)", str(text))
     return text
 
 
