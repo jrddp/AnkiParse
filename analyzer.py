@@ -21,8 +21,10 @@ def analyze(file):
             try:
                 start_command(Command.create(action, args, body))
             except ValueError:
-                current_command += line
-        elif current_command is not None:
+                pass
+            else:
+                continue
+        if current_command is not None:
             current_command += line
 
     if current_command: current_command.do()
