@@ -1,6 +1,5 @@
 import re
 
-# TODO add image parsing, then to be stored using ankiConnect
 # TODO allow default code langs based on deck
 
 saved_image_prefix = "_"
