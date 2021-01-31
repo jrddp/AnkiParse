@@ -1,6 +1,5 @@
 import cards
 
-# TODO add t and f args for q command, streamlining true/false cards
 # TODO add support for deck prompting when deck is missing
 # TODO allow default decks based on directories
 
@@ -53,7 +52,14 @@ class CommandQuestion(Command):
 
     def do(self):
         if cards.current_card is not None: cards.current_card.close()
-        cards.current_card = cards.Card(front=self.body, add_reversed="q" in self.args)
+
+        if ("t" in self.args or "f" in self.args):
+            front = "**True or False?**\n" + self.body
+            answer = "t" in self.args # True for t arg and f if f arg
+            cards.current_card = cards.Card(front=front, back=str(answer), add_reversed="q" in self.args)
+        else:
+            cards.current_card = cards.Card(front=self.body, add_reversed="q" in self.args)
+
         super().do()
 
 
