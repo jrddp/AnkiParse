@@ -1,5 +1,8 @@
 import re
 
+# TODO add support for bold and italics
+# TODO add image parsing, then to be stored using ankiConnect
+# TODO allow default code langs based on deck
 
 def format_newlines(text):
     return text.replace("\n", "<br \\>")

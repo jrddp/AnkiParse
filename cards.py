@@ -1,5 +1,6 @@
 import formatter
 
+# TODO Create reformatted text to replace in analyzed file with nice note format
 
 class Card:
 

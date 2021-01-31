@@ -1,5 +1,9 @@
 import cards
 
+# TODO add t and f args for q command, streamlining true/false cards
+# TODO add support for deck prompting when deck is missing
+# TODO allow default decks based on directories
+
 last_cmd_cache = {}
 
 replacable_str = "___"
