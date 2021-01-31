@@ -5,7 +5,7 @@
 Sets the deck that any following cards will be added to
 
 ## Question: !q
-> Usage: `!q[q] {BODY}`
+> Usage: `!q[qtf] {BODY}`
 
 Opens a new card with `{BODY}` as the front side text
 
@@ -15,6 +15,9 @@ If an existing card is opened, it will be finalized
 
 ### Reverse Card Argument: q
 Changes behavior to also add the reverse of the created card. Will not affect Cloze cards.
+
+### True or False Arguments: t or f
+Will automatically build a card preficed with "True or False:", and set the front of the card to "True" (for arg t) and "False" (for arg f)
 
 ## Answer: !a
 > Usage: `!a {BODY}`
@@ -49,6 +52,11 @@ Finalizes the currently open card
 Will use the same values for the last `a` or `t` called for the current card.
 
 # Autoformatting
+## Markdown Bold/Italics
+Markdown &ast;&ast;**bold**&ast;&ast; and &ast;*italics*&ast; will be converted to HTML formatting.
+
+Formatting using underscores  (&#95;&#95;**bold**&#95;&#95; and &#95;*italics*&#95;) are not supported.
+
 ## Markdown Code Blocks
 Any markdown-formatted code blocks will automatically be formatted when creating the card, so long as the respective language is included.
 
