@@ -2,7 +2,6 @@ import formatter
 
 # TODO Create reformatted text to replace in analyzed file with nice note format
 
-saved_image_prefix = "_"
 anki_connect_port = 'http://127.0.0.1:8765'
 
 
@@ -20,7 +19,7 @@ class Card:
         self.tags = tags
         self.model = model
         self.add_reversed = add_reversed
-        self.image_paths = []
+        self.image_paths = set()
 
     def get_json(self):
         if self.model == "Cloze":
@@ -44,6 +43,7 @@ class Card:
     def close(self):
         try:
             self.image_paths = formatter.get_image_paths(self.front)
+            self.image_paths.update(formatter.get_image_paths(self.back))
 
             self.front = formatter.format_everything(self.front)
             self.back = formatter.format_everything(self.back)
@@ -56,26 +56,15 @@ class Card:
 
 
 def get_image_store_json(image_path):
-    import pathlib
-    is_url = "://" in image_path
-    if is_url:
-        path_str = str(image_path)
-        last_file_sep = path_str.rfind("/")
-        if last_file_sep == -1: last_file_sep = 0
-        filename = path_str[last_file_sep:]
-    else:
-        import analyzer
+    import formatter, analyzer
+    is_url = formatter.is_url(image_path)
+    if not is_url:
         image_path = analyzer.current_file_path.absolute().parent / image_path
-        filename = pathlib.Path(image_path).name
-
-
-    filename = saved_image_prefix + filename
-
     return {
         "action": "storeMediaFile",
         "version": 6,
         "params": {
-            "filename": filename,
+            "filename": formatter.get_image_name(image_path),
             "url" if is_url else "path": str(image_path)
         }
     }
