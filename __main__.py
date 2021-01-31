@@ -1,5 +1,6 @@
 if __name__ == '__main__':
     import analyzer, sys
+    from pathlib import Path
 
-    with open(sys.argv[1], "r") as f:
-        analyzer.analyze(f)
+    path = Path(sys.argv[1])
+    analyzer.analyze(path)

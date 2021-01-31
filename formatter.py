@@ -1,8 +1,11 @@
 import re
-
+from pathlib import Path
 
 # TODO add image parsing, then to be stored using ankiConnect
 # TODO allow default code langs based on deck
+
+image_pattern = r"!\[(.*)\]\((.+)\)"
+
 
 def format_newlines(text):
     return text.replace("\n", "<br \\>")
@@ -48,11 +51,22 @@ def format_code_blocks(text):
 
     return re.sub(code_block_pattern, format_block, text, flags=re.DOTALL)
 
+def format_images(text):
+    from cards import saved_image_prefix
+    # Converts all markdown formatted images to HTML formatting, modified by $saved_image_prefix
+    text = re.sub(image_pattern, fr'<img src="{saved_image_prefix}\2" alt="\1">', str(text))
+    return text
+
 
 def format_everything(text: str):
     return format_newlines(
         format_bold_and_italics(
             format_latex_to_mathjax(
                 format_code_blocks(
+                    format_images(
                     text.strip()
-                ))))
+                )))))
+
+
+def get_image_paths(text: str):
+    return [match[1] for match in re.findall(image_pattern, text)]
