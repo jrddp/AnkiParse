@@ -51,7 +51,7 @@ class Card:
         if self.model == "Cloze":
             import re
             # Replace any Cloze deletions with bold text
-            note_str = "> " + re.sub(r"{{c[0-9]+::(.+)}}", r"<b>\1</b>", self.front.strip())
+            note_str = "> " + re.sub(r"{{c[0-9]+::(.+?)}}", r"<b>\1</b>", self.front.strip())
             if self.back: note_str += "\n\n" + self.back.strip()
         else:
             note_str = f"> <b>{self.front.strip()}</b>\n\n{self.back.strip()}"
@@ -77,10 +77,9 @@ class Card:
             self.image_paths.update(formatter.get_image_paths(self.back))
 
             send_card_to_anki(self)
+            Card.closed_cards.append(self)
         except Exception as e:
             print(f"{e.__class__.__name__}: {e.args}")
-        else:
-            Card.closed_cards.append(self)
 
 
 def get_image_store_json(image_path):
