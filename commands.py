@@ -70,7 +70,7 @@ class CommandAnswer(Command):
     repeatable = True
 
     def do(self):
-        cards.current_card.back = self.body
+        cards.current_card.back = cards.current_card.back + self.body
         super().do()
 
 
