@@ -56,7 +56,7 @@ class CommandQuestion(Command):
 
         if ("t" in self.args or "f" in self.args):
             front = "**True or False?**\n" + self.body
-            answer = "t" in self.args # True for t arg and f if f arg
+            answer = "**" + str("t" in self.args) + "**\n" # True for t arg and f if f arg
             cards.current_card = cards.Card(front=front, back=str(answer), add_reversed="q" in self.args, start_index=self.start_index)
         else:
             cards.current_card = cards.Card(front=self.body, add_reversed=("q" in self.args), start_index=self.start_index)
