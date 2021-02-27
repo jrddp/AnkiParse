@@ -1,8 +1,13 @@
 # Commands
 ## Deck: !d
-> Usage: `!d {DECK}[::SUBDECK]`
+> Usage: `!d {DECK}[::SUBDECK]` \
+> OR `!dt {TAG1} {TAG2}...`
 
 Sets the deck that any following cards will be added to
+
+### File-wide Tag Argument: t
+Changes behavior to setting the default tags to be added onto every card defined in the file after the command.
+If this is used again later in the file, the original tags will be overridden.
 
 ## Question: !q
 > Usage: `!q[qtf] {BODY}`
@@ -17,7 +22,7 @@ If an existing card is opened, it will be finalized
 Changes behavior to also add the reverse of the created card. Will not affect Cloze cards.
 
 ### True or False Arguments: t or f
-Will automatically build a card preficed with "True or False:", and set the front of the card to "True" (for arg t) and "False" (for arg f)
+Will automatically build a card prefaced with "True or False:", and set the front of the card to "True" (for arg t) and "False" (for arg f)
 
 ## Answer: !a
 > Usage: `!a {BODY}`

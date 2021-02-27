@@ -9,6 +9,7 @@ class Card:
     def __init__(self, front, start_index, back="", tags=None, model="Basic", add_reversed=False):
         if tags is None:
             tags = []
+        tags.extend(current_tags)
 
         if (add_reversed): model = "Basic (and reversed card)"
 
@@ -122,3 +123,4 @@ def send_card_to_anki(card):
 
 current_deck = None
 current_card: Card = None
+current_tags = []

@@ -2,7 +2,7 @@ import cards
 
 # TODO add support for deck prompting when deck is missing
 # TODO allow default decks based on directories
-# TODO add filewide tags as an option to the deck command
+# TODO add arg to d command for creating the deck if non-existent
 
 last_cmd_cache = {}
 
@@ -44,7 +44,10 @@ class CommandDeck(Command):
     multiline = False
 
     def do(self):
-        cards.current_deck = self.body
+        if "t" in self.args:
+            cards.current_tags = self.body.split()
+        else:
+            cards.current_deck = self.body
         super().do()
 
 

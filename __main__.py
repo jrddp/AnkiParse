@@ -1,4 +1,5 @@
 # TODO make in-file replacement a flag option
+# TODO output total count of cards uploaded
 
 if __name__ == '__main__':
     import analyzer, sys
