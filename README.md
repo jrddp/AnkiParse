@@ -57,6 +57,9 @@ Markdown &ast;&ast;**bold**&ast;&ast; and &ast;*italics*&ast; will be converted 
 
 Formatting using underscores  (&#95;&#95;**bold**&#95;&#95; and &#95;*italics*&#95;) are not supported.
 
+## Markdown Images
+Any valid markdown-formatted image will automatically be uploaded to Anki and attached to the card.
+
 ## Markdown Code Blocks
 Any markdown-formatted code blocks will automatically be formatted when creating the card, so long as the respective language is included.
 
