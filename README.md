@@ -1,9 +1,12 @@
 # Commands
 ## Deck: !d
-> Usage: `!d {DECK}[::SUBDECK]` \
+> Usage: `!d[c] {DECK}[::SUBDECK]` \
 > OR `!dt {TAG1} {TAG2}...`
 
 Sets the deck that any following cards will be added to
+
+### Create deck argument: c
+Ensures that the specified deck is created if it does not already exist.
 
 ### File-wide Tag Argument: t
 Changes behavior to setting the default tags to be added onto every card defined in the file after the command.

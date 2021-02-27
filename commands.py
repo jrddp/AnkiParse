@@ -2,7 +2,6 @@ import cards
 
 # TODO add support for deck prompting when deck is missing
 # TODO allow default decks based on directories
-# TODO add arg to d command for creating the deck if non-existent
 
 last_cmd_cache = {}
 
@@ -47,6 +46,9 @@ class CommandDeck(Command):
         if "t" in self.args:
             cards.current_tags = self.body.split()
         else:
+            if "c" in self.args:
+                import anki_connector
+                anki_connector.create_anki_deck(self.body)
             cards.current_deck = self.body
         super().do()
 
