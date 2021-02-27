@@ -1,3 +1,5 @@
+# TODO make in-file replacement a flag option
+
 if __name__ == '__main__':
     import analyzer, sys
     from pathlib import Path

@@ -1,7 +1,5 @@
 import formatter
 
-# TODO Create reformatted text to replace in analyzed file with nice note format
-
 anki_connect_port = 'http://127.0.0.1:8765'
 
 

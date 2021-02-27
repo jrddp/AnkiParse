@@ -2,6 +2,7 @@ import cards
 
 # TODO add support for deck prompting when deck is missing
 # TODO allow default decks based on directories
+# TODO add filewide tags as an option to the deck command
 
 last_cmd_cache = {}
 
