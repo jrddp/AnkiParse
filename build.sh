@@ -1,5 +1,5 @@
 #!/bin/sh
-fn='anki-add'
+fn='anki-parse'
 zip "${fn}.zip" *.py
 [ -d "build" ] || mkdir "build"
 echo '#!/bin/env python3' | cat - "${fn}.zip" > "build/$fn"
