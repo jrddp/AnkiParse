@@ -88,11 +88,16 @@ class CommandReplace(Command):
         sequential = "s" in self.args
         text = cards.current_card.front
         count = text.count(replacable_str)
+        cloze_num = cards.current_card.cloze_sets_count + 1
         if count == 1:
-            text = text.replace(replacable_str, "{{c1::%s}}" % self.body.strip(), 1)
+            text = text.replace(replacable_str, "{{c%d::%s}}" % (cloze_num, self.body.strip()), 1)
         else:
-            for i, repl in enumerate(self.body.split(replacement_delim), 1):
-                text = text.replace(replacable_str, "{{c%d::%s}}" % ((i if sequential else 1), repl.strip()), 1)
+            for i, repl in enumerate(self.body.split(replacement_delim), cloze_num):
+                new_repl = "{{c%d::%s}}" % ((i if sequential else cloze_num), repl.strip())
+                text = text.replace(replacable_str, new_repl, 1)
+
+        cards.current_card.cloze_sets_count += count if sequential else 1
+
         cards.current_card.front = text
         cards.current_card.model = "Cloze"
         super().do()

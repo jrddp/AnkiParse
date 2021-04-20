@@ -18,6 +18,8 @@ class Card:
         self.tags = tags
         self.model = model
         self.add_reversed = add_reversed
+
+        self.cloze_sets_count = 0
         self.image_paths = set()
         self.line_range = [start_index, -1]
 
