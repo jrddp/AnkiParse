@@ -68,6 +68,8 @@ If there are multiple "___", multiple replacements can be seperated by "///". By
 
 Having any `!r` perform on an open card will change it to a Cloze card.
 
+Performing multiple `!r` on the same card will result in different Cloze groupings for each command.
+
 #### Sequential Argument: `s`
 Changes behavior of multiple replacements to create individual cards for each replacement, rather than one card for all replacements
 
