@@ -8,7 +8,7 @@ class Card:
     def __init__(self, front, start_index, back="", tags=None, model="Basic", add_reversed=False):
         if tags is None:
             tags = []
-        tags.extend(current_tags)
+        tags.extend(get_current_tag_list())
 
         if (add_reversed): model = "Basic (and reversed card)"
 
@@ -84,4 +84,7 @@ class Card:
 
 current_deck = None
 current_card: Card = None
-current_tags = []
+current_tags = {}
+
+def get_current_tag_list():
+    return [tag for tagset in current_tags.values() for tag in tagset]

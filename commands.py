@@ -44,7 +44,8 @@ class CommandDeck(Command):
 
     def do(self):
         if "t" in self.args:
-            cards.current_tags = self.body.split()
+            tag_level = str.count(self.args, "t")
+            cards.current_tags[tag_level] = self.body.split()
         else:
             if "c" in self.args:
                 import anki_connector
@@ -96,7 +97,7 @@ class CommandReplace(Command):
                 new_repl = "{{c%d::%s}}" % ((i if sequential else cloze_num), repl.strip())
                 text = text.replace(replacable_str, new_repl, 1)
 
-        cards.current_card.cloze_sets_count += count if sequential else 1
+        cards.current_card.cloze_sets_count += (count if sequential else 1)
 
         cards.current_card.front = text
         cards.current_card.model = "Cloze"
