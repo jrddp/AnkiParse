@@ -61,14 +61,21 @@ def format_images(text):
     return text
 
 
+def remap_angle_brackets(text):
+    text = text.replace('<', '&lt')
+    text = text.replace('<', '&gt')
+    return text
+
+
 def format_everything(text: str):
     return format_newlines(
         format_bold_and_italics(
             format_latex_to_mathjax(
                 format_code_blocks(
                     format_images(
-                        text.strip()
-                    )))))
+                        remap_angle_brackets(
+                            text.strip()
+                        ))))))
 
 
 def get_image_paths(text: str):
