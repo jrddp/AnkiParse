@@ -38,6 +38,7 @@ Ensures that the specified deck is created if it does not already exist.
 #### File-wide Tag Argument: t
 Changes behavior to setting the default tags to be added onto every card defined in the file after the command.
 If this is used again later in the file, the original tags will be overridden.
+Tags are separated by whitespace.
 
 These default tags can be nested depending on how many 't's are in the arguments.
 For example, `!dt` is one level of tags and `!dtt` is another, which can be modified independently.
